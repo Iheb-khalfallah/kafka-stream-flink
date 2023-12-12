@@ -1,5 +1,0 @@
-jobmanager.rpc.address: jobmanager
-rest.port: 18081
-state.backend: rocksdb
-state.backend.incremental: true
-state.checkpoint-storage: filesystem

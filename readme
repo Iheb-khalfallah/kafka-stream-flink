@@ -1,0 +1,23 @@
+#create topics inside kafka broker
+python3 createKafkaTopic.py
+
+#send data from csv file to mongo db
+python3 pyMango.py
+
+#send data from mongo db to kafka broker
+python3 gateway.py
+
+#list all topics by name
+docker exec -it docker-kafka-1 kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+#inspect urgent_data topic
+docker exec -it docker-kafka-1 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic urgent_data --from-beginning
+
+#inspect all topics
+docker exec -it docker-kafka-1 kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+
+#consume data from kafka topics with flink
+docker-compose exec jobmanager ./bin/flink run -py /opt/pyflink-kafka-stream/KafkaConsumer.py -d
+
+
